@@ -30,7 +30,7 @@ Central Asian STEM Vault is a trilingual online platform that provides free STEM
 
 ## Live Website
 
-coming soon...
+https://aishakonai386-maker.github.io/stem-vault/
 
 ## Screenshots
 
