@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resources | Central Asian STEM Vault</title>
+
+    <script src="i18n.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #040F0E;
+            color: #C9F6FA;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 6%;
+            border-bottom: 1px solid rgba(201, 246, 250, 0.1);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .logo {
+            color: #C9F6FA;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .nav-links { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
+        .nav-links a {
+            color: #C9F6FA;
+            text-decoration: none;
+            font-size: 13px;
+            opacity: 0.8;
+        }
+        .nav-links a:link, .nav-links a:visited {
+            color: #C9F6FA;
+            text-decoration: none;
+        }
+        .nav-links a:hover { opacity: 1; color: #E7BDF2; }
+
+        .lang-switch { display: flex; gap: 8px; }
+        .lang-switch button {
+            background: transparent;
+            border: 1px solid rgba(201, 246, 250, 0.25);
+            color: #C9F6FA;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .lang-switch button:hover {
+            border-color: #E7BDF2;
+            color: #E7BDF2;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 90px 8% 60px;
+        }
+        .eyebrow {
+            color: #E7BDF2;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+        .page-header h1 {
+            font-size: 52px;
+            margin: 20px 0;
+            line-height: 1.15;
+        }
+        .page-header p {
+            max-width: 750px;
+            margin: auto;
+            font-size: 18px;
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        .section {
+            padding: 50px 8% 30px;
+            max-width: 1100px;
+            margin: auto;
+        }
+        .section h2 {
+            font-size: 30px;
+            margin-bottom: 12px;
+            color: #C9F6FA;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section h2 .icon {
+            font-size: 32px;
+        }
+        .section .lead {
+            font-size: 16px;
+            line-height: 1.7;
+            opacity: 0.75;
+            max-width: 850px;
+            margin-bottom: 30px;
+        }
+
+        .res-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+        .res-card {
+            background: #061716;
+            border: 1px solid rgba(201, 246, 250, 0.15);
+            border-radius: 14px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            transition: 0.25s;
+        }
+        .res-card:hover {
+            border-color: rgba(201, 246, 250, 0.35);
+            transform: translateY(-3px);
+        }
+        .res-card h3 {
+            color: #C9F6FA;
+            font-size: 19px;
+            margin-bottom: 12px;
+        }
+        .res-card p {
+            color: #C9F6FA;
+            opacity: 0.75;
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .res-card .meta {
+            color: #E7BDF2;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+        }
+        .res-card a {
+            color: #E7BDF2;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            margin-top: auto;
+        }
+        .res-card a:hover { color: #C9F6FA; }
+
+        .callout {
+            max-width: 900px;
+            margin: 60px auto;
+            background: rgba(231, 189, 242, 0.08);
+            border: 1px solid rgba(231, 189, 242, 0.25);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+        .callout h3 {
+            color: #E7BDF2;
+            font-size: 22px;
+            margin-bottom: 14px;
+        }
+        .callout p {
+            color: #C9F6FA;
+            opacity: 0.88;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 35px;
+            border-top: 1px solid rgba(201, 246, 250, 0.1);
+            font-size: 13px;
+            opacity: 0.6;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 900px) {
+            .res-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 700px) {
+            .nav-links { display: none; }
+            .page-header h1 { font-size: 38px; }
+            .section h2 { font-size: 24px; }
+            .res-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">STEM Vault</a>
+        <div class="nav-links">
+            <a href="index.html" data-i18n="nav.home">Home</a>
+            <a href="opportunities.html" data-i18n="nav.opportunities">Opportunities</a>
+            <a href="scholarships.html" data-i18n="nav.scholarships">Scholarships</a>
+            <a href="research.html" data-i18n="nav.research">Research</a>
+            <a href="stem-fields.html" data-i18n="nav.fields">STEM Fields</a>
+            <a href="competitions.html" data-i18n="nav.comp">Competitions</a>
+            <a href="strategy.html" data-i18n="nav.strat">Strategy</a>
+            <a href="resources.html" data-i18n="nav.resources">Resources</a>
+            <a href="about.html" data-i18n="nav.about">About</a>
+        </div>
+        <div class="lang-switch">
+            <button onclick="setLanguage('en')">EN</button>
+            <button onclick="setLanguage('ru')">RU</button>
+            <button onclick="setLanguage('kz')">KZ</button>
+        </div>
+    </nav>
+
+
+    <header class="page-header">
+        <span class="eyebrow" data-i18n="respage.eyebrow">RESOURCES</span>
+        <h1 data-i18n="respage.heading">Free tools that actually help</h1>
+        <p data-i18n="respage.subtitle">
+            A curated list of the best free resources for studying, learning, and preparing for exams —
+            all accessible from a phone with internet.
+        </p>
+    </header>
+
+
+    <!-- MATH -->
+    <section class="section">
+        <h2><span class="icon">🧮</span> <span data-i18n="respage.math.heading">Math</span></h2>
+        <p class="lead" data-i18n="respage.math.lead">
+            From algebra to calculus — build a strong math base. Math is the foundation of everything in STEM.
+        </p>
+        <div class="res-grid">
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.math.r1.meta">FREE · ALL LEVELS</div>
+                <h3 data-i18n="respage.math.r1.title">Khan Academy Math</h3>
+                <p data-i18n="respage.math.r1.text">
+                    Complete courses from arithmetic to calculus. Video lessons, exercises, and progress tracking. Available in multiple languages.
+                </p>
+                <a href="https://www.khanacademy.org/math" data-i18n="respage.visit">Visit →</a>
+            </div>
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.math.r2.meta">FREE · OLYMPIAD</div>
+                <h3 data-i18n="respage.math.r2.title">Art of Problem Solving</h3>
+                <p data-i18n="respage.math.r2.text">
+                    The gold standard for math olympiad preparation. Has a free forum with thousands of solved problems.
+                </p>
+                <a href="https://artofproblemsolving.com" data-i18n="respage.visit">Visit →</a>
+            </div>
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.math.r3.meta">FREE · TOOL</div>
+                <h3 data-i18n="respage.math.r3.title">Wolfram Alpha</h3>
+                <p data-i18n="respage.math.r3.text">
+                    Solve equations, plot graphs, and check your work. Answers any math question step by step.
+                </p>
+                <a href="https://www.wolframalpha.com" data-i18n="respage.visit">Visit →</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SCIENCE -->
+    <section class="section">
+        <h2><span class="icon">🔬</span> <span data-i18n="respage.sci.heading">Science</span></h2>
+        <p class="lead" data-i18n="respage.sci.lead">
+            Biology, chemistry, physics — explore concepts visually and deeply.
+        </p>
+        <div class="res-grid">
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.sci.r1.meta">FREE · ALL SCIENCES</div>
+                <h3 data-i18n="respage.sci.r1.title">Khan Academy Science</h3>
+                <p data-i18n="respage.sci.r1.text">
+                    Full courses in biology, chemistry, physics, and more. Aligned with school curricula worldwide.
+                </p>
+                <a href="https://www.khanacademy.org/science" data-i18n="respage.visit">Visit →</a>
+            </div>
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.sci.r2.meta">FREE · INTERACTIVE</div>
+                <h3 data-i18n="respage.sci.r2.title">PhET Simulations</h3>
+                <p data-i18n="respage.sci.r2.text">
+                    Interactive science simulations from University of Colorado. Play with physics, chemistry, and biology concepts visually.
+                </p>
+                <a href="https://phet.colorado.edu" data-i18n="respage.visit">Visit →</a>
+            </div>
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.sci.r3.meta">FREE · VIDEO</div>
+                <h3 data-i18n="respage.sci.r3.title">CrashCourse (YouTube)</h3>
+                <p data-i18n="respage.sci.r3.text">
+                    Fast-paced, well-made videos on biology, chemistry, physics, and more. Great for revision.
+                </p>
+                <a href="https://www.youtube.com/@crashcourse" data-i18n="respage.visit">Visit →</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CODING -->
+    <section class="section">
+        <h2><span class="icon">💻</span> <span data-i18n="respage.code.heading">Coding</span></h2>
+        <p class="lead" data-i18n="respage.code.lead">
+            Learn to code from scratch — no prior experience needed. All free.
+        </p>
+        <div class="res-grid">
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.code.r1.meta">FREE · BEGINNER</div>
+                <h3 data-i18n="respage.code.r1.title">freeCodeCamp</h3>
+                <p data-i18n="respage.code.r1.text">
+                    Full curriculum in web development, Python, and more. Free certificates. Project-based learning.
+                </p>
+                <a href="https://www.freecodecamp.org" data-i18n="respage.visit">Visit →</a>
+            </div>
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.code.r2.meta">FREE · PRACTICE</div>
+                <h3 data-i18n="respage.code.r2.title">Codeforces</h3>
+                <p data-i18n="respage.code.r2.text">
+                    Competitive programming platform. Solve problems daily to prepare for olympiads like IOI.
+                </p>
+                <a href="https://codeforces.com" data-i18n="respage.visit">Visit →</a>
+            </div>
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.code.r3.meta">FREE · INTERVIEW PREP</div>
+                <h3 data-i18n="respage.code.r3.title">LeetCode</h3>
+                <p data-i18n="respage.code.r3.text">
+                    Practice coding interview problems. Great for building algorithmic thinking.
+                </p>
+                <a href="https://leetcode.com" data-i18n="respage.visit">Visit →</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ENGLISH -->
+    <section class="section">
+        <h2><span class="icon">🌐</span> <span data-i18n="respage.eng.heading">English</span></h2>
+        <p class="lead" data-i18n="respage.eng.lead">
+            English opens 90% of the world's free resources. Build it a little every day.
+        </p>
+        <div class="res-grid">
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.eng.r1.meta">FREE · APP</div>
+                <h3 data-i18n="respage.eng.r1.title">Duolingo</h3>
+                <p data-i18n="respage.eng.r1.text">
+                    Fun, gamified English learning. 10–15 minutes a day. Available on web and mobile.
+                </p>
+                <a href="https://www.duolingo.com" data-i18n="respage.visit">Visit →</a>
+            </div>
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.eng.r2.meta">FREE · BBC</div>
+                <h3 data-i18n="respage.eng.r2.title">BBC Learning English</h3>
+                <p data-i18n="respage.eng.r2.text">
+                    Free lessons, videos, and audio from the BBC. Covers grammar, vocabulary, and pronunciation.
+                </p>
+                <a href="https://www.bbc.co.uk/learningenglish" data-i18n="respage.visit">Visit →</a>
+            </div>
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.eng.r3.meta">FREE · READING</div>
+                <h3 data-i18n="respage.eng.r3.title">Breaking News English</h3>
+                <p data-i18n="respage.eng.r3.text">
+                    News articles rewritten at multiple English levels. Read, listen, and answer questions.
+                </p>
+                <a href="https://breakingnewsenglish.com" data-i18n="respage.visit">Visit →</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- RESEARCH & WRITING -->
+    <section class="section">
+        <h2><span class="icon">📚</span> <span data-i18n="respage.res.heading">Research &amp; Writing</span></h2>
+        <p class="lead" data-i18n="respage.res.lead">
+            Tools for finding sources, organizing your research, and writing strong academic papers.
+        </p>
+        <div class="res-grid">
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.res.r1.meta">FREE · SEARCH</div>
+                <h3 data-i18n="respage.res.r1.title">Google Scholar</h3>
+                <p data-i18n="respage.res.r1.text">
+                    Search academic papers, citations, and research from around the world. Free to browse and read abstracts.
+                </p>
+                <a href="https://scholar.google.com" data-i18n="respage.visit">Visit →</a>
+            </div>
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.res.r2.meta">FREE · CITATION</div>
+                <h3 data-i18n="respage.res.r2.title">Zotero</h3>
+                <p data-i18n="respage.res.r2.text">
+                    Organize your sources and generate citations automatically. Essential for any research project.
+                </p>
+                <a href="https://www.zotero.org" data-i18n="respage.visit">Visit →</a>
+            </div>
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.res.r3.meta">FREE · WRITING</div>
+                <h3 data-i18n="respage.res.r3.title">Purdue OWL</h3>
+                <p data-i18n="respage.res.r3.text">
+                    The best free guide to academic writing, citations, and essay structure. Used by universities worldwide.
+                </p>
+                <a href="https://owl.purdue.edu" data-i18n="respage.visit">Visit →</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- EXAM PREP -->
+    <section class="section">
+        <h2><span class="icon">🎓</span> <span data-i18n="respage.exam.heading">Exam Prep</span></h2>
+        <p class="lead" data-i18n="respage.exam.lead">
+            Free prep for standardized tests and university entrance exams.
+        </p>
+        <div class="res-grid">
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.exam.r1.meta">FREE · SAT</div>
+                <h3 data-i18n="respage.exam.r1.title">Khan Academy SAT Prep</h3>
+                <p data-i18n="respage.exam.r1.text">
+                    Official free SAT prep — built in partnership with College Board. Full practice tests and lessons.
+                </p>
+                <a href="https://www.khanacademy.org/sat" data-i18n="respage.visit">Visit →</a>
+            </div>
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.exam.r2.meta">FREE · IELTS</div>
+                <h3 data-i18n="respage.exam.r2.title">IELTS Practice Materials</h3>
+                <p data-i18n="respage.exam.r2.text">
+                    Free sample tests and prep materials for IELTS. Useful if you're applying to universities abroad.
+                </p>
+                <a href="https://www.ielts.org" data-i18n="respage.visit">Visit →</a>
+            </div>
+            <div class="res-card">
+                <div class="meta" data-i18n="respage.exam.r3.meta">FREE · AP</div>
+                <h3 data-i18n="respage.exam.r3.title">AP Practice (College Board)</h3>
+                <p data-i18n="respage.exam.r3.text">
+                    Free practice questions and past exams for AP courses. Great if your school offers AP.
+                </p>
+                <a href="https://apstudents.collegeboard.org" data-i18n="respage.visit">Visit →</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CALLOUT -->
+    <div class="callout">
+        <h3 data-i18n="respage.callout.title">You don't need to pay for anything on this list.</h3>
+        <p data-i18n="respage.callout.text">
+            Every resource here is free or has a free tier. Start with one, use it consistently for a month,
+            and you'll learn more than most students do in a year. Don't hoard resources — pick one and go deep.
+        </p>
+    </div>
+
+
+    <footer>
+        <span data-i18n="footer.copy">© 2026 Central Asian STEM Vault</span>
+    </footer>
+
+</body>
+</html>

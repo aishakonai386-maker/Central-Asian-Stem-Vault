@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Competitions | Central Asian STEM Vault</title>
+
+    <script src="i18n.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #040F0E;
+            color: #C9F6FA;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 8%;
+            border-bottom: 1px solid rgba(201, 246, 250, 0.1);
+        }
+        .logo {
+            color: #C9F6FA;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a {
+            color: #C9F6FA;
+            text-decoration: none;
+            font-size: 15px;
+            opacity: 0.8;
+        }
+        .nav-links a:link, .nav-links a:visited {
+            color: #C9F6FA;
+            text-decoration: none;
+        }
+        .nav-links a:hover { opacity: 1; color: #E7BDF2; }
+
+        .lang-switch { display: flex; gap: 8px; }
+        .lang-switch button {
+            background: transparent;
+            border: 1px solid rgba(201, 246, 250, 0.25);
+            color: #C9F6FA;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .lang-switch button:hover {
+            border-color: #E7BDF2;
+            color: #E7BDF2;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 90px 8% 60px;
+        }
+        .eyebrow {
+            color: #E7BDF2;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+        .page-header h1 {
+            font-size: 52px;
+            margin: 20px 0;
+        }
+        .page-header p {
+            max-width: 750px;
+            margin: auto;
+            font-size: 18px;
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        /* Sections */
+        .section {
+            padding: 60px 8% 40px;
+            max-width: 1100px;
+            margin: auto;
+        }
+        .section h2 {
+            font-size: 34px;
+            margin-bottom: 20px;
+            color: #C9F6FA;
+        }
+        .section .lead {
+            font-size: 17px;
+            line-height: 1.7;
+            opacity: 0.8;
+            max-width: 900px;
+            margin-bottom: 35px;
+        }
+
+        /* Categories grid */
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+        .cat-card {
+            background: #061716;
+            border: 1px solid rgba(201, 246, 250, 0.15);
+            border-radius: 14px;
+            padding: 28px;
+        }
+        .cat-card h3 {
+            color: #E7BDF2;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        .cat-card p {
+            color: #C9F6FA;
+            opacity: 0.75;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* Competition cards */
+        .comp-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+        .comp-card {
+            background: rgba(201, 246, 250, 0.04);
+            border: 1px solid rgba(201, 246, 250, 0.12);
+            border-radius: 20px;
+            padding: 32px;
+            transition: 0.3s;
+        }
+        .comp-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(201, 246, 250, 0.3);
+        }
+        .comp-card .tag {
+            display: inline-block;
+            color: #E7BDF2;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        .comp-card h3 {
+            color: #C9F6FA;
+            font-size: 22px;
+            margin-bottom: 14px;
+        }
+        .comp-card p {
+            color: #C9F6FA;
+            opacity: 0.75;
+            line-height: 1.6;
+            font-size: 15px;
+            margin-bottom: 18px;
+        }
+        .comp-card .details {
+            font-size: 14px;
+            opacity: 0.65;
+            color: #C9F6FA;
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+        .comp-card a {
+            color: #E7BDF2;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .comp-card a:hover { color: #C9F6FA; }
+
+        /* Callout */
+        .callout {
+            max-width: 900px;
+            margin: 60px auto;
+            background: rgba(231, 189, 242, 0.08);
+            border: 1px solid rgba(231, 189, 242, 0.25);
+            border-radius: 16px;
+            padding: 35px;
+            text-align: center;
+        }
+        .callout h3 {
+            color: #E7BDF2;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+        .callout p {
+            color: #C9F6FA;
+            opacity: 0.85;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 35px;
+            border-top: 1px solid rgba(201, 246, 250, 0.1);
+            font-size: 13px;
+            opacity: 0.6;
+            margin-top: 60px;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            .nav-links { display: none; }
+            .page-header h1 { font-size: 38px; }
+            .section h2 { font-size: 28px; }
+            .cat-grid { grid-template-columns: 1fr; }
+            .comp-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">STEM Vault</a>
+                <div class="nav-links">
+            <a href="index.html" data-i18n="nav.home">Home</a>
+            <a href="opportunities.html" data-i18n="nav.opportunities">Opportunities</a>
+            <a href="scholarships.html" data-i18n="nav.scholarships">Scholarships</a>
+            <a href="research.html" data-i18n="nav.research">Research</a>
+            <a href="stem-fields.html" data-i18n="nav.fields">STEM Fields</a>
+            <a href="competitions.html" data-i18n="nav.comp">Competitions</a>
+            <a href="strategy.html" data-i18n="nav.strat">Strategy</a>
+            <a href="resources.html" data-i18n="nav.resources">Resources</a>
+            <a href="about.html" data-i18n="nav.about">About</a>
+        </div>
+        <div class="lang-switch">
+            <button onclick="setLanguage('en')">EN</button>
+            <button onclick="setLanguage('ru')">RU</button>
+            <button onclick="setLanguage('kz')">KZ</button>
+        </div>
+    </nav>
+
+
+    <header class="page-header">
+        <span class="eyebrow" data-i18n="comp.eyebrow">COMPETITIONS</span>
+        <h1 data-i18n="comp.heading">Competitions</h1>
+        <p data-i18n="comp.subtitle">
+            Competitions are one of the best ways to grow — they test your knowledge, connect you with
+            other students, and open doors. Many are completely free and open to students from any town or city.
+        </p>
+    </header>
+
+
+    <!-- WHY COMPETE -->
+    <section class="section">
+        <h2 data-i18n="comp.why.heading">Why should you enter competitions?</h2>
+        <p class="lead" data-i18n="comp.why.lead">
+            You don't need to win to benefit. Entering competitions helps you learn faster, meet motivated students,
+            and build a strong application for universities and scholarships.
+        </p>
+        <div class="cat-grid">
+            <div class="cat-card">
+                <h3 data-i18n="comp.why.card1.title">Push yourself</h3>
+                <p data-i18n="comp.why.card1.text">
+                    Competitions challenge you to go deeper than classroom material — real problems, real thinking.
+                </p>
+            </div>
+            <div class="cat-card">
+                <h3 data-i18n="comp.why.card2.title">Meet peers</h3>
+                <p data-i18n="comp.why.card2.text">
+                    You'll connect with students from across your country and the world who share your interests.
+                </p>
+            </div>
+            <div class="cat-card">
+                <h3 data-i18n="comp.why.card3.title">Strengthen applications</h3>
+                <p data-i18n="comp.why.card3.text">
+                    Universities and scholarship programs value competition experience — even if you don't win.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CATEGORIES -->
+    <section class="section">
+        <h2 data-i18n="comp.cat.heading">What kinds of competitions exist?</h2>
+        <p class="lead" data-i18n="comp.cat.lead">
+            Competitions come in many forms — pick the ones that match your interests and skills.
+        </p>
+        <div class="cat-grid">
+            <div class="cat-card">
+                <h3 data-i18n="comp.cat.olymp.title">Subject Olympiads</h3>
+                <p data-i18n="comp.cat.olymp.text">
+                    Math, physics, chemistry, biology, informatics. National and international levels.
+                </p>
+            </div>
+            <div class="cat-card">
+                <h3 data-i18n="comp.cat.robotics.title">Robotics &amp; Engineering</h3>
+                <p data-i18n="comp.cat.robotics.text">
+                    Build robots, drones, or machines. Often team-based and hands-on.
+                </p>
+            </div>
+            <div class="cat-card">
+                <h3 data-i18n="comp.cat.hack.title">Hackathons &amp; Coding</h3>
+                <p data-i18n="comp.cat.hack.text">
+                    Solve problems with code in 24–48 hours. Great for aspiring programmers.
+                </p>
+            </div>
+            <div class="cat-card">
+                <h3 data-i18n="comp.cat.research.title">Research Competitions</h3>
+                <p data-i18n="comp.cat.research.text">
+                    Present original research on science, math, or engineering topics.
+                </p>
+            </div>
+            <div class="cat-card">
+                <h3 data-i18n="comp.cat.essay.title">Essay &amp; Innovation</h3>
+                <p data-i18n="comp.cat.essay.text">
+                    Write about science, propose solutions, or pitch ideas for real-world problems.
+                </p>
+            </div>
+            <div class="cat-card">
+                <h3 data-i18n="comp.cat.team.title">Team Challenges</h3>
+                <p data-i18n="comp.cat.team.text">
+                    Case competitions, quizzes, and problem-solving events with teams.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FEATURED COMPETITIONS -->
+    <section class="section">
+        <h2 data-i18n="comp.featured.heading">Competitions to know about</h2>
+        <p class="lead" data-i18n="comp.featured.lead">
+            These competitions are open to high school students and many are free to enter. Some are
+            international — you can often participate online or through your school.
+        </p>
+        <div class="comp-grid">
+
+            <div class="comp-card">
+                <span class="tag" data-i18n="comp.i1.tag">INTERNATIONAL</span>
+                <h3 data-i18n="comp.i1.title">International Math Olympiad (IMO)</h3>
+                <p data-i18n="comp.i1.text">
+                    The most prestigious math competition in the world. Students compete in national teams.
+                    You start by doing well in national olympiads.
+                </p>
+                <div class="details" data-i18n="comp.i1.details">
+                    Level: High school<br>
+                    Cost: Free<br>
+                    How to join: Through national olympiad selection
+                </div>
+                <a href="https://www.imo-official.org" data-i18n="comp.i1.link">Official website →</a>
+            </div>
+
+            <div class="comp-card">
+                <span class="tag" data-i18n="comp.i2.tag">INTERNATIONAL</span>
+                <h3 data-i18n="comp.i2.title">International Olympiad in Informatics (IOI)</h3>
+                <p data-i18n="comp.i2.text">
+                    The top programming competition for high school students. Focuses on algorithms
+                    and problem-solving. Requires strong coding skills.
+                </p>
+                <div class="details" data-i18n="comp.i2.details">
+                    Level: High school<br>
+                    Cost: Free<br>
+                    How to join: Through national selection
+                </div>
+                <a href="https://ioinformatics.org" data-i18n="comp.i2.link">Official website →</a>
+            </div>
+
+            <div class="comp-card">
+                <span class="tag" data-i18n="comp.i3.tag">INTERNATIONAL</span>
+                <h3 data-i18n="comp.i3.title">Regeneron ISEF</h3>
+                <p data-i18n="comp.i3.text">
+                    The world's largest international pre-college science research competition.
+                    You present an original research project.
+                </p>
+                <div class="details" data-i18n="comp.i3.details">
+                    Level: High school<br>
+                    Cost: Free to enter<br>
+                    How to join: Through affiliated regional fairs
+                </div>
+                <a href="https://www.societyforscience.org/isef/" data-i18n="comp.i3.link">Official website →</a>
+            </div>
+
+            <div class="comp-card">
+                <span class="tag" data-i18n="comp.i4.tag">INTERNATIONAL</span>
+                <h3 data-i18n="comp.i4.title">FIRST Robotics Competition</h3>
+                <p data-i18n="comp.i4.text">
+                    Teams design, build, and program a robot to compete in a challenge.
+                    Great for students interested in engineering and teamwork.
+                </p>
+                <div class="details" data-i18n="comp.i4.details">
+                    Level: High school<br>
+                    Cost: Team fees (sponsorships available)<br>
+                    How to join: Form or join a school team
+                </div>
+                <a href="https://www.firstinspires.org/robotics/frc" data-i18n="comp.i4.link">Official website →</a>
+            </div>
+
+            <div class="comp-card">
+                <span class="tag" data-i18n="comp.i5.tag">INTERNATIONAL</span>
+                <h3 data-i18n="comp.i5.title">Google Science Fair</h3>
+                <p data-i18n="comp.i5.text">
+                    Submit a science or engineering project to compete globally.
+                    Focus on real-world problems and innovation.
+                </p>
+                <div class="details" data-i18n="comp.i5.details">
+                    Level: Ages 13–18<br>
+                    Cost: Free<br>
+                    How to join: Online submission
+                </div>
+                <a href="https://www.googlesciencefair.com" data-i18n="comp.i5.link">Official website →</a>
+            </div>
+
+            <div class="comp-card">
+                <span class="tag" data-i18n="comp.i6.tag">REGIONAL</span>
+                <h3 data-i18n="comp.i6.title">National Olympiads (Kazakhstan, Kyrgyzstan, Uzbekistan, Tajikistan)</h3>
+                <p data-i18n="comp.i6.text">
+                    Every Central Asian country runs national olympiads in math, physics, chemistry, biology,
+                    and informatics. Winners often qualify for international teams.
+                </p>
+                <div class="details" data-i18n="comp.i6.details">
+                    Level: Grades 8–11<br>
+                    Cost: Free<br>
+                    How to join: Ask your school or regional education department
+                </div>
+                <a href="#" data-i18n="comp.i6.link">Ask your school →</a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- HOW TO PREPARE -->
+    <section class="section">
+        <h2 data-i18n="comp.prep.heading">How to prepare</h2>
+        <p class="lead" data-i18n="comp.prep.lead">
+            You do not need a private tutor or expensive courses. Consistent practice and the right free
+            resources are more than enough.
+        </p>
+        <div class="cat-grid">
+            <div class="cat-card">
+                <h3 data-i18n="comp.prep.card1.title">Start early</h3>
+                <p data-i18n="comp.prep.card1.text">
+                    Give yourself months, not weeks. Even 30 minutes of focused practice a day adds up fast.
+                </p>
+            </div>
+            <div class="cat-card">
+                <h3 data-i18n="comp.prep.card2.title">Use free resources</h3>
+                <p data-i18n="comp.prep.card2.text">
+                    Khan Academy, AoPS (Art of Problem Solving), Codeforces, and past olympiad papers are free online.
+                </p>
+            </div>
+            <div class="cat-card">
+                <h3 data-i18n="comp.prep.card3.title">Find a mentor or team</h3>
+                <p data-i18n="comp.prep.card3.text">
+                    A teacher, older student, or online community can help you prepare faster and stay motivated.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CALLOUT -->
+    <div class="callout">
+        <h3 data-i18n="comp.callout.title">You don't have to be the best to compete.</h3>
+        <p data-i18n="comp.callout.text">
+            Many top competitors started in small towns with no special resources — just curiosity and consistent
+            effort. The first competition is the hardest. After that, every attempt makes you stronger. Start with
+            a local or national olympiad, and build from there.
+        </p>
+    </div>
+
+
+    <footer>
+        <span data-i18n="footer.copy">© 2026 Central Asian STEM Vault</span>
+    </footer>
+
+</body>
+</html>

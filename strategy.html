@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Academic Strategy | Central Asian STEM Vault</title>
+
+    <script src="i18n.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #040F0E;
+            color: #C9F6FA;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 8%;
+            border-bottom: 1px solid rgba(201, 246, 250, 0.1);
+        }
+        .logo {
+            color: #C9F6FA;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a {
+            color: #C9F6FA;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        .nav-links a:link, .nav-links a:visited {
+            color: #C9F6FA;
+            text-decoration: none;
+        }
+        .nav-links a:hover { opacity: 1; color: #E7BDF2; }
+
+        .lang-switch { display: flex; gap: 8px; }
+        .lang-switch button {
+            background: transparent;
+            border: 1px solid rgba(201, 246, 250, 0.25);
+            color: #C9F6FA;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .lang-switch button:hover {
+            border-color: #E7BDF2;
+            color: #E7BDF2;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 90px 8% 60px;
+        }
+        .eyebrow {
+            color: #E7BDF2;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+        .page-header h1 {
+            font-size: 52px;
+            margin: 20px 0;
+            line-height: 1.15;
+        }
+        .page-header p {
+            max-width: 750px;
+            margin: auto;
+            font-size: 18px;
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        /* Sections */
+        .section {
+            padding: 60px 8% 40px;
+            max-width: 1100px;
+            margin: auto;
+        }
+        .section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #C9F6FA;
+        }
+        .section .lead {
+            font-size: 17px;
+            line-height: 1.8;
+            opacity: 0.85;
+            max-width: 900px;
+            margin-bottom: 35px;
+        }
+
+        /* Letter-style tips */
+        .letter {
+            background: rgba(231, 189, 242, 0.05);
+            border-left: 3px solid #E7BDF2;
+            border-radius: 12px;
+            padding: 35px 40px;
+            margin-bottom: 40px;
+            max-width: 900px;
+        }
+        .letter p {
+            font-size: 17px;
+            line-height: 1.85;
+            opacity: 0.88;
+            margin-bottom: 18px;
+            color: #C9F6FA;
+        }
+        .letter p:last-child { margin-bottom: 0; }
+        .letter p strong {
+            color: #E7BDF2;
+            font-weight: bold;
+        }
+
+        /* Tip cards */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+        .tip-card {
+            background: #061716;
+            border: 1px solid rgba(201, 246, 250, 0.15);
+            border-radius: 14px;
+            padding: 30px;
+        }
+        .tip-card .num {
+            color: #E7BDF2;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+        }
+        .tip-card h3 {
+            color: #C9F6FA;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        .tip-card p {
+            color: #C9F6FA;
+            opacity: 0.78;
+            line-height: 1.65;
+            font-size: 15px;
+        }
+
+        /* Callout */
+        .callout {
+            max-width: 900px;
+            margin: 60px auto;
+            background: rgba(231, 189, 242, 0.08);
+            border: 1px solid rgba(231, 189, 242, 0.25);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+        .callout h3 {
+            color: #E7BDF2;
+            font-size: 22px;
+            margin-bottom: 14px;
+        }
+        .callout p {
+            color: #C9F6FA;
+            opacity: 0.88;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 35px;
+            border-top: 1px solid rgba(201, 246, 250, 0.1);
+            font-size: 13px;
+            opacity: 0.6;
+            margin-top: 60px;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            .nav-links { display: none; }
+            .page-header h1 { font-size: 38px; }
+            .section h2 { font-size: 26px; }
+            .tips-grid { grid-template-columns: 1fr; }
+            .letter { padding: 25px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">STEM Vault</a>
+               <div class="nav-links">
+            <a href="index.html" data-i18n="nav.home">Home</a>
+            <a href="opportunities.html" data-i18n="nav.opportunities">Opportunities</a>
+            <a href="scholarships.html" data-i18n="nav.scholarships">Scholarships</a>
+            <a href="research.html" data-i18n="nav.research">Research</a>
+            <a href="stem-fields.html" data-i18n="nav.fields">STEM Fields</a>
+            <a href="competitions.html" data-i18n="nav.comp">Competitions</a>
+            <a href="strategy.html" data-i18n="nav.strat">Strategy</a>
+            <a href="resources.html" data-i18n="nav.resources">Resources</a>
+            <a href="about.html" data-i18n="nav.about">About</a>
+        </div>
+        <div class="lang-switch">
+            <button onclick="setLanguage('en')">EN</button>
+            <button onclick="setLanguage('ru')">RU</button>
+            <button onclick="setLanguage('kz')">KZ</button>
+        </div>
+    </nav>
+
+
+    <header class="page-header">
+        <span class="eyebrow" data-i18n="strat.eyebrow">ACADEMIC STRATEGY</span>
+        <h1 data-i18n="strat.heading">A letter from someone who's been there</h1>
+        <p data-i18n="strat.subtitle">
+            No lectures. No "top 10 hacks". Just honest advice from someone a few steps ahead of you,
+            who also grew up without private tutors and expensive programs.
+        </p>
+    </header>
+
+
+    <!-- THE LETTER -->
+    <section class="section">
+        <div class="letter">
+            <p data-i18n="strat.letter.p1">
+                <strong>Hey.</strong> I know what it feels like to sit in a small classroom and wonder if
+                you're falling behind students in the capital. Or to see people online with tutors, laptops,
+                coding clubs — and think "they have everything I don't."
+            </p>
+            <p data-i18n="strat.letter.p2">
+                Here's the truth: the gap between you and them <strong>is smaller than it looks.</strong>
+                Most of what they have access to is free and available to you too, if you know where to look.
+                What actually separates students isn't resources — it's <strong>strategy and consistency.</strong>
+            </p>
+            <p data-i18n="strat.letter.p3">
+                This page is what I wish someone had told me at 14. Read it slowly. Come back to it when you
+                feel stuck. And most importantly — <strong>do a little every day.</strong> Not a lot. A little.
+            </p>
+        </div>
+    </section>
+
+
+    <!-- TIPS -->
+    <section class="section">
+        <h2 data-i18n="strat.tips.heading">Six things that actually matter</h2>
+        <p class="lead" data-i18n="strat.tips.lead">
+            Forget the "study hacks". These are the habits that quietly separate successful students from
+            everyone else — and none of them require money.
+        </p>
+        <div class="tips-grid">
+
+            <div class="tip-card">
+                <div class="num">01</div>
+                <h3 data-i18n="strat.tip1.title">Protect your focus</h3>
+                <p data-i18n="strat.tip1.text">
+                    Your phone is your biggest enemy, not your school. Study in 25-minute blocks with your
+                    phone in another room. That one habit will double what you learn in a week.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <div class="num">02</div>
+                <h3 data-i18n="strat.tip2.title">Read for 20 minutes a day</h3>
+                <p data-i18n="strat.tip2.text">
+                    In English — anything. News, fiction, Wikipedia, subtitles on shows. Reading is the
+                    single fastest way to improve in English, and English unlocks 90% of the world's free resources.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <div class="num">03</div>
+                <h3 data-i18n="strat.tip3.title">Go deep on ONE subject</h3>
+                <p data-i18n="strat.tip3.text">
+                    Don't try to be good at everything. Pick one subject — math, coding, biology, whatever
+                    pulls you — and go deeper than your class. That depth becomes your superpower in applications.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <div class="num">04</div>
+                <h3 data-i18n="strat.tip4.title">Start a small project</h3>
+                <p data-i18n="strat.tip4.text">
+                    A website. A small research on your village's water. A coding game. Anything you built
+                    yourself. Projects teach you more than any course, and they're what universities remember.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <div class="num">05</div>
+                <h3 data-i18n="strat.tip5.title">Find one person ahead of you</h3>
+                <p data-i18n="strat.tip5.text">
+                    A teacher, an older student, someone on a forum or a Discord. Ask them questions.
+                    You don't need ten mentors — just one person who's a few steps ahead and willing to help.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <div class="num">06</div>
+                <h3 data-i18n="strat.tip6.title">Stop waiting to feel ready</h3>
+                <p data-i18n="strat.tip6.text">
+                    You'll never feel ready. Apply to the program anyway. Enter the competition anyway.
+                    Send the email anyway. Most of the "prepared" students just started earlier — that's it.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- WHAT TO ACTUALLY DO -->
+    <section class="section">
+        <h2 data-i18n="strat.plan.heading">If I were you, here's my plan</h2>
+        <p class="lead" data-i18n="strat.plan.lead">
+            Not a schedule. Just what I'd focus on, if I had four years of high school ahead of me
+            and no special resources.
+        </p>
+        <div class="tips-grid">
+
+            <div class="tip-card">
+                <div class="num" data-i18n="strat.plan.year1.label">YEAR 1–2</div>
+                <h3 data-i18n="strat.plan.year1.title">Build your base</h3>
+                <p data-i18n="strat.plan.year1.text">
+                    English, math, and one science you love. Focus on fundamentals — they make everything
+                    later easier. Do one small project. Join one olympiad, even if you don't win.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <div class="num" data-i18n="strat.plan.year2.label">YEAR 3</div>
+                <h3 data-i18n="strat.plan.year2.title">Go deeper</h3>
+                <p data-i18n="strat.plan.year2.text">
+                    Pick your main subject and go beyond school. Take free online courses. Start your own
+                    research or project. Enter national competitions. You're building your story now.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <div class="num" data-i18n="strat.plan.year3.label">YEAR 4</div>
+                <h3 data-i18n="strat.plan.year3.title">Apply and finish strong</h3>
+                <p data-i18n="strat.plan.year3.text">
+                    Scholarships, universities, programs. Your earlier work becomes your application.
+                    Don't panic-apply — you'll already have a real story if you built it over the years.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <div class="num" data-i18n="strat.plan.always.label">ALWAYS</div>
+                <h3 data-i18n="strat.plan.always.title">Keep learning outside school</h3>
+                <p data-i18n="strat.plan.always.text">
+                    School gives you the basics. Your edge comes from what you do in the evenings, on
+                    weekends, and during holidays. That's where the real growth happens.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- FREE RESOURCES -->
+    <section class="section">
+        <h2 data-i18n="strat.res.heading">Free tools you should be using</h2>
+        <p class="lead" data-i18n="strat.res.lead">
+            These are the sites and platforms I'd use if I were starting again today. All free,
+            all accessible from a phone with internet.
+        </p>
+        <div class="tips-grid">
+
+            <div class="tip-card">
+                <h3 data-i18n="strat.res1.title">Khan Academy</h3>
+                <p data-i18n="strat.res1.text">
+                    Free courses in math, science, English, and more. Khan Academy is basically a free
+                    school from kindergarten to university. Start here first.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <h3 data-i18n="strat.res2.title">Coursera &amp; edX</h3>
+                <p data-i18n="strat.res2.text">
+                    University courses from top schools — free to audit. You won't get a certificate
+                    unless you pay, but the knowledge is completely free.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <h3 data-i18n="strat.res3.title">Codeforces &amp; LeetCode</h3>
+                <p data-i18n="strat.res3.text">
+                    If you're into coding, these are where real programmers practice. Start with
+                    easy problems and solve one every day.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <h3 data-i18n="strat.res4.title">AoPS (Art of Problem Solving)</h3>
+                <p data-i18n="strat.res4.text">
+                    The gold standard for math olympiad prep. Has a free forum with thousands of
+                    solved problems and a community happy to help you.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <h3 data-i18n="strat.res5.title">MIT OpenCourseWare</h3>
+                <p data-i18n="strat.res5.text">
+                    Real MIT lectures — free, forever. Yes, it's hard. You don't need to understand
+                    everything — just watching one video a week changes how you think.
+                </p>
+            </div>
+
+            <div class="tip-card">
+                <h3 data-i18n="strat.res6.title">YouTube</h3>
+                <p data-i18n="strat.res6.text">
+                    Underrated. 3Blue1Brown for math, CrashCourse for everything else, freeCodeCamp
+                    for coding. Free education from the best teachers in the world.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CALLOUT -->
+    <div class="callout">
+        <h3 data-i18n="strat.callout.title">You are not behind. You are early.</h3>
+        <p data-i18n="strat.callout.text">
+            The students who succeed from small towns aren't smarter. They just started before it felt
+            comfortable, kept going when it felt pointless, and stopped comparing themselves to people
+            with more advantages. Your starting point is not your ending point. Start today — even if
+            it's just 20 minutes. That's enough.
+        </p>
+    </div>
+
+
+    <footer>
+        <span data-i18n="footer.copy">© 2026 Central Asian STEM Vault</span>
+    </footer>
+
+</body>
+</html>

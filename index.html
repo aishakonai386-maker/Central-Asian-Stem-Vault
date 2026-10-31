@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Asian STEM Vault</title>
+
+    <style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #040F0E;
+        color: #C9F6FA;
+    }
+
+    /* Navigation */
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 8%;
+        background: #040F0E;
+        border-bottom: 1px solid rgba(201, 246, 250, 0.15);
+    }
+
+    .logo {
+        font-size: 22px;
+        font-weight: bold;
+        color: #C9F6FA;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 30px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #C9F6FA;
+        font-size: 15px;
+    }
+
+    .nav-links a:hover {
+        color: #E7BDF2;
+    }
+
+    /* Hero section */
+   .hero {
+    position: relative;
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px;
+    background: #040F0E;
+    overflow: hidden;
+}
+
+/* Animated gradient blobs */
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 60vmax;
+    height: 60vmax;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero::before {
+    background: radial-gradient(circle, #E7BDF2 0%, transparent 70%);
+    top: -20%;
+    left: -15%;
+    animation: float1 18s ease-in-out infinite;
+}
+
+.hero::after {
+    background: radial-gradient(circle, #C9F6FA 0%, transparent 70%);
+    bottom: -25%;
+    right: -15%;
+    animation: float2 22s ease-in-out infinite;
+}
+
+@keyframes float1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(60px, 40px) scale(1.15); }
+}
+
+@keyframes float2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(-50px, -40px) scale(1.1); }
+}
+
+/* Keep your content above the blobs */
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+}
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+    .hero::before,
+    .hero::after {
+        animation: none;
+    }
+    
+}
+
+    .hero p {
+        font-size: 20px;
+        line-height: 1.6;
+        color: #C9F6FA;
+        opacity: 0.8;
+        margin-bottom: 35px;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 15px 28px;
+        background: #E7BDF2;
+        color: #040F0E;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+    .button:hover {
+        background: #C9F6FA;
+    }
+
+        /* Categories */
+    .categories {
+        padding: 70px 8%;
+        background: #061716;
+    }
+
+    .categories h2 {
+        text-align: center;
+        font-size: 35px;
+        margin-bottom: 45px;
+        color: #C9F6FA;
+    }
+
+    /* ---- Carousel shell ---- */
+    .carousel {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        max-width: 1200px;
+        margin: auto;
+        padding: 0 10px;
+    }
+
+    .carousel-viewport {
+        overflow: hidden;
+        flex: 1;
+        padding: 20px 0;
+        -webkit-mask-image: linear-gradient(to right,
+            transparent 0, #000 6%, #000 94%, transparent 100%);
+                mask-image: linear-gradient(to right,
+            transparent 0, #000 6%, #000 94%, transparent 100%);
+    }
+
+    .carousel-track {
+        display: flex;
+        transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ---- Cards ---- */
+    .vault-card {
+        flex: 0 0 30%;
+        margin: 0 12px;
+        padding: 34px 28px 30px;
+        border-radius: 18px;
+        background: linear-gradient(160deg, #0a2624 0%, #061716 100%);
+        border: 1px solid rgba(201, 246, 250, 0.14);
+        text-decoration: none;
+        color: #C9F6FA;
+        display: flex;
+        flex-direction: column;
+        min-height: 300px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .vault-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            400px circle at var(--mx, 50%) var(--my, 0%),
+            rgba(231, 189, 242, 0.14),
+            transparent 60%);
+        opacity: 0;
+        transition: opacity 0.35s ease;
+        pointer-events: none;
+    }
+
+    .vault-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(231, 189, 242, 0.55);
+        box-shadow: 0 20px 40px -18px rgba(231, 189, 242, 0.35);
+    }
+
+    .vault-card:hover::before { opacity: 1; }
+
+    .vault-card-icon {
+        font-size: 30px;
+        width: 60px;
+        height: 60px;
+        border-radius: 14px;
+        background: rgba(201, 246, 250, 0.06);
+        border: 1px solid rgba(201, 246, 250, 0.14);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 22px;
+        transition: 0.3s ease;
+    }
+
+    .vault-card:hover .vault-card-icon {
+        background: rgba(231, 189, 242, 0.12);
+        border-color: rgba(231, 189, 242, 0.4);
+        transform: scale(1.06) rotate(-3deg);
+    }
+
+    .vault-card h3 {
+        font-size: 22px;
+        margin-bottom: 12px;
+        color: #C9F6FA;
+    }
+
+    .vault-card p {
+        color: #C9F6FA;
+        opacity: 0.7;
+        line-height: 1.6;
+        font-size: 15px;
+        margin-bottom: 22px;
+    }
+
+    .vault-card-cta {
+        margin-top: auto;
+        font-weight: bold;
+        font-size: 14px;
+        color: #E7BDF2;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: gap 0.25s ease;
+    }
+
+    .vault-card:hover .vault-card-cta { gap: 12px; }
+
+    /* ---- Arrows ---- */
+    .carousel-arrow {
+        flex-shrink: 0;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(201, 246, 250, 0.05);
+        border: 1px solid rgba(201, 246, 250, 0.22);
+        color: #C9F6FA;
+        font-size: 26px;
+        line-height: 1;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 4px;
+        transition: 0.25s ease;
+        backdrop-filter: blur(6px);
+    }
+
+    .carousel-arrow:hover:not(:disabled) {
+        background: #E7BDF2;
+        border-color: #E7BDF2;
+        color: #040F0E;
+        transform: scale(1.08);
+    }
+
+    .carousel-arrow:disabled {
+        opacity: 0.25;
+        cursor: not-allowed;
+    }
+
+    /* ---- Dots ---- */
+    .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 34px;
+    }
+
+    .carousel-dots span {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(201, 246, 250, 0.25);
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+    .carousel-dots span.active {
+        background: #E7BDF2;
+        width: 26px;
+        border-radius: 5px;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 1000px) {
+        .vault-card { flex: 0 0 45%; }
+    }
+
+    @media (max-width: 700px) {
+        .vault-card { flex: 0 0 85%; }
+        .carousel-arrow { display: none; }
+    }
+
+/* Dots */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 25px;
+}
+
+.carousel-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(201, 246, 250, 0.3);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.carousel-dots span.active {
+    background: #E7BDF2;
+    width: 22px;
+    border-radius: 4px;
+}
+
+/* Mobile: show 1 card */
+@media (max-width: 700px) {
+    .carousel-track .card {
+        flex: 0 0 100%;
+    }
+    .carousel-btn {
+        display: none;
+    }
+}
+    /* About section */
+
+.about {
+    padding: 100px 8%;
+    background: #040F0E;
+}
+
+.about-content {
+    max-width: 850px;
+    margin: auto;
+    text-align: center;
+}
+
+.eyebrow {
+    color: #E7BDF2;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.about h2 {
+    margin-top: 20px;
+    margin-bottom: 25px;
+    font-size: 42px;
+    line-height: 1.2;
+    color: #C9F6FA;
+}
+
+.about p {
+    color: #C9F6FA;
+    opacity: 0.75;
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+}
+
+    /* Footer */
+    footer {
+        text-align: center;
+        padding: 30px;
+        background: #040F0E;
+        color: #C9F6FA;
+        opacity: 0.6;
+    }
+
+    @media (max-width: 700px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 42px; }
+    .cards,
+    .opportunity-grid,
+    .steps { grid-template-columns: 1fr; }
+}
+
+
+    /* Featured opportunities */
+
+.featured {
+    padding: 100px 8%;
+    background: #061716;
+}
+
+.section-heading {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    text-align: center;
+}
+
+.section-heading h2 {
+    font-size: 42px;
+    margin: 18px 0;
+    color: #C9F6FA;
+}
+
+.section-heading p {
+    color: #C9F6FA;
+    opacity: 0.7;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.opportunity-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.opportunity-card {
+    background: #040F0E;
+    border: 1px solid rgba(201, 246, 250, 0.18);
+    border-radius: 14px;
+    padding: 32px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+.opportunity-card:hover {
+    border-color: #C9F6FA;
+    transform: translateY(-4px);
+    transition: 0.2s;
+}
+
+.tag {
+    color: #C9F6FA;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 22px;
+}
+
+.tag.pink {
+    color: #E7BDF2;
+}
+
+.opportunity-card h3 {
+    color: #C9F6FA;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.opportunity-card p {
+    color: #C9F6FA;
+    opacity: 0.7;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.opportunity-card a {
+    color: #E7BDF2;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: auto;
+}
+
+.view-all {
+    text-align: center;
+    margin-top: 45px;
+}
+
+.outline-button {
+    display: inline-block;
+    padding: 13px 25px;
+    border: 1px solid #C9F6FA;
+    border-radius: 8px;
+    color: #C9F6FA;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.outline-button:hover {
+    background: #C9F6FA;
+    color: #040F0E;
+}
+/* How it works */
+
+.how-it-works {
+    padding: 100px 8%;
+    background: #040F0E;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.step {
+    padding: 30px;
+    border-left: 1px solid rgba(201, 246, 250, 0.25);
+}
+
+.step-number {
+    color: #E7BDF2;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.step h3 {
+    color: #C9F6FA;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.step p {
+    color: #C9F6FA;
+    opacity: 0.7;
+    line-height: 1.6;
+}
+.steps {
+    grid-template-columns: 1fr;
+}
+.lang-switch {
+    display: flex;
+    gap: 8px;
+}
+
+.lang-switch button {
+    background: transparent;
+    border: 1px solid rgba(201, 246, 250, 0.25);
+    color: #C9F6FA;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.lang-switch button:hover {
+    border-color: #E7BDF2;
+    color: #E7BDF2;
+}
+</style>
+
+<script src="i18n.js"></script>
+</head>
+<body>
+
+        <nav>
+        <a href="index.html" class="logo">STEM Vault</a>
+
+        <div class="nav-links">
+            <a href="index.html" data-i18n="nav.home">Home</a>
+            <a href="opportunities.html" data-i18n="nav.opportunities">Opportunities</a>
+            <a href="scholarships.html" data-i18n="nav.scholarships">Scholarships</a>
+            <a href="research.html" data-i18n="nav.research">Research</a>
+            <a href="stem-fields.html" data-i18n="nav.fields">STEM Fields</a>
+            <a href="competitions.html" data-i18n="nav.comp">Competitions</a>
+            <a href="strategy.html" data-i18n="nav.strat">Strategy</a>
+            <a href="resources.html" data-i18n="nav.resources">Resources</a>
+            <a href="about.html" data-i18n="nav.about">About</a>
+        </div>
+
+        <div class="lang-switch">
+            <button onclick="setLanguage('en')">EN</button>
+            <button onclick="setLanguage('ru')">RU</button>
+            <button onclick="setLanguage('kz')">KZ</button>
+        </div>
+    </nav>
+
+
+    <section class="hero">
+        <div class="hero-content">
+
+            <h1 data-i18n="hero.title"><span class="accent">STEM opportunities,</span><br>made accessible.</h1>
+
+<p data-i18n="hero.subtitle">
+    Central Asian STEM Vault helps high-school students discover
+    STEM opportunities, competitions, scholarships, research resources,
+    and academic pathways beyond their local communities.
+</p>
+
+<a href="opportunities.html" class="button" data-i18n="hero.cta">Explore opportunities</a>
+
+        </div>
+    </section>
+
+<section class="categories">
+    <h2 data-i18n="categories.heading">Explore STEM Vault</h2>
+
+    <div class="carousel">
+        <button class="carousel-arrow" id="prevBtn" aria-label="Previous">‹</button>
+
+        <div class="carousel-viewport">
+            <div class="carousel-track" id="carouselTrack">
+
+                <a href="opportunities.html" class="vault-card">
+                    <div class="vault-card-icon">🚀</div>
+                    <h3 data-i18n="card.opportunities.title">Opportunities</h3>
+                    <p data-i18n="card.opportunities.text">Discover competitions, programs, internships, and other opportunities for high-school students.</p>
+                    <span class="vault-card-cta">Explore →</span>
+                </a>
+
+                <a href="scholarships.html" class="vault-card">
+                    <div class="vault-card-icon">🎓</div>
+                    <h3 data-i18n="card.scholarships.title">Scholarships</h3>
+                    <p data-i18n="card.scholarships.text">Find scholarships and funding opportunities for students pursuing STEM.</p>
+                    <span class="vault-card-cta">Explore →</span>
+                </a>
+
+                <a href="research.html" class="vault-card">
+                    <div class="vault-card-icon">🔬</div>
+                    <h3 data-i18n="card.research.title">Research</h3>
+                    <p data-i18n="card.research.text">Learn how to find research topics, conduct research, and write a strong research project.</p>
+                    <span class="vault-card-cta">Explore →</span>
+                </a>
+
+                <a href="stem-fields.html" class="vault-card">
+                    <div class="vault-card-icon">🧬</div>
+                    <h3 data-i18n="card.fields.title">STEM Fields</h3>
+                    <p data-i18n="card.fields.text">Explore different STEM fields and discover possible academic and career pathways.</p>
+                    <span class="vault-card-cta">Explore →</span>
+                </a>
+
+                <a href="competitions.html" class="vault-card">
+                    <div class="vault-card-icon">🏆</div>
+                    <h3 data-i18n="card.competitions.title">Competitions</h3>
+                    <p data-i18n="card.competitions.text">Explore olympiads, robotics competitions, hackathons, and other STEM challenges.</p>
+                    <span class="vault-card-cta">Explore →</span>
+                </a>
+
+                <a href="strategy.html" class="vault-card">
+                    <div class="vault-card-icon">🧭</div>
+                    <h3 data-i18n="card.strategy.title">Academic Strategy</h3>
+                    <p data-i18n="card.strategy.text">Practical resources for studying, building extracurriculars, and preparing for applications.</p>
+                    <span class="vault-card-cta">Explore →</span>
+                </a>
+
+            </div>
+        </div>
+
+        <button class="carousel-arrow" id="nextBtn" aria-label="Next">›</button>
+    </div>
+
+    <div class="carousel-dots" id="carouselDots"></div>
+</section>
+
+<section class="about">
+    
+
+    <div class="about-content">
+
+<span class="eyebrow" data-i18n="about.eyebrow">WHY STEM VAULT?</span>
+
+<h2 data-i18n="about.heading">STEM opportunities shouldn't depend on where you live.</h2>
+
+<p data-i18n="about.p1">
+    For many students across Central Asia, finding STEM
+    opportunities can be difficult. Information about
+    competitions, scholarships, research, and academic
+    pathways is often scattered across different places.
+</p>
+
+<p data-i18n="about.p2">
+    STEM Vault brings these resources together in one place,
+    helping students discover opportunities beyond their
+    local communities.
+</p>
+
+    </div>
+
+</section>
+<section class="featured">
+
+   <div class="section-heading">
+    <span class="eyebrow" data-i18n="featured.eyebrow">DISCOVER</span>
+    <h2 data-i18n="featured.heading">Featured Opportunities</h2>
+    <p data-i18n="featured.subtitle">
+        Explore programs, competitions, scholarships, and other
+        opportunities for students interested in STEM.
+    </p>
+</div>
+
+    <div class="opportunity-grid">
+
+        <div class="opportunity-card">
+            <span class="tag" data-i18n="featured.card1.tag">COMPETITION</span>
+            <h3 data-i18n="featured.card1.title">STEM Competitions</h3>
+            <p data-i18n="featured.card1.text">
+                Discover olympiads, robotics competitions,
+                hackathons, and challenges for high-school students.
+            </p>
+            <a href="competitions.html" data-i18n="featured.card1.link">Explore →</a>
+        </div>
+
+        <div class="opportunity-card">
+            <span class="tag pink" data-i18n="featured.card2.tag">SCHOLARSHIP</span>
+            <h3 data-i18n="featured.card2.title">Scholarships</h3>
+            <p data-i18n="featured.card2.text">
+                Find funding opportunities that can help students
+                pursue STEM education around the world.
+            </p>
+            <a href="scholarships.html" data-i18n="featured.card2.link">Explore →</a>
+        </div>
+
+        <div class="opportunity-card">
+            <span class="tag" data-i18n="featured.card3.tag">PROGRAM</span>
+            <h3 data-i18n="featured.card3.title">STEM Programs</h3>
+            <p data-i18n="featured.card3.text">
+                Explore summer programs, academic initiatives,
+                workshops, and other learning opportunities.
+            </p>
+            <a href="opportunities.html" data-i18n="featured.card3.link">Explore →</a>
+        </div>
+
+    </div>
+    <div class="view-all">
+        <a href="opportunities.html" class="outline-button" data-i18n="featured.viewall">View all opportunities</a>
+    </div>
+</section>
+<section class="how-it-works">
+
+    <div class="section-heading">
+    <span class="eyebrow" data-i18n="how.eyebrow">HOW IT WORKS</span>
+    <h2 data-i18n="how.heading">From discovery to action.</h2>
+    <p data-i18n="how.subtitle">
+        STEM Vault helps students find opportunities and gives
+        them the resources to make the most of them.
+    </p>
+</div>
+
+<div class="steps">
+
+    <div class="step">
+        <div class="step-number">01</div>
+        <h3 data-i18n="how.step1.title">Discover</h3>
+        <p data-i18n="how.step1.text">
+            Find competitions, scholarships, programs,
+            research opportunities, and more.
+        </p>
+    </div>
+
+    <div class="step">
+        <div class="step-number">02</div>
+        <h3 data-i18n="how.step2.title">Learn</h3>
+        <p data-i18n="how.step2.text">
+            Build your knowledge with practical guides,
+            resources, and academic strategies.
+        </p>
+    </div>
+
+    <div class="step">
+        <div class="step-number">03</div>
+        <h3 data-i18n="how.step3.title">Take action</h3>
+        <p data-i18n="how.step3.text">
+            Apply, compete, research, and pursue opportunities
+            beyond your local community.
+        </p>
+    </div>
+
+</div>
+
+</section>
+
+
+    <footer>
+    <span data-i18n="footer.copy">© 2026 Central Asian STEM Vault</span>
+</footer>
+<script>
+(function () {
+    const track    = document.getElementById('carouselTrack');
+    const dotsWrap = document.getElementById('carouselDots');
+    const prevBtn  = document.getElementById('prevBtn');
+    const nextBtn  = document.getElementById('nextBtn');
+    const cards    = track.querySelectorAll('.vault-card');
+
+    let index = 0;
+
+    function visibleCount() {
+        if (window.innerWidth <= 700)  return 1;
+        if (window.innerWidth <= 1000) return 2;
+        return 3;
+    }
+    function maxIndex() {
+        return Math.max(0, cards.length - visibleCount());
+    }
+
+    function update() {
+        const card = cards[0];
+        const style = getComputedStyle(card);
+        const step = card.offsetWidth
+                   + parseFloat(style.marginLeft)
+                   + parseFloat(style.marginRight);
+
+        track.style.transform = `translateX(-${index * step}px)`;
+
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index >= maxIndex();
+
+        dotsWrap.innerHTML = '';
+        for (let i = 0; i <= maxIndex(); i++) {
+            const dot = document.createElement('span');
+            if (i === index) dot.classList.add('active');
+            dot.addEventListener('click', () => { index = i; update(); });
+            dotsWrap.appendChild(dot);
+        }
+    }
+
+    prevBtn.addEventListener('click', () => { index = Math.max(0, index - 1); update(); });
+    nextBtn.addEventListener('click', () => { index = Math.min(maxIndex(), index + 1); update(); });
+
+    // Optional: subtle mouse-follow glow on each card
+    cards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const r = card.getBoundingClientRect();
+            card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+            card.style.setProperty('--my', `${e.clientY - r.top}px`);
+        });
+    });
+
+    window.addEventListener('resize', () => {
+        index = Math.min(index, maxIndex());
+        update();
+    });
+
+    update();
+})();
+</script>
+</body>
+</html>

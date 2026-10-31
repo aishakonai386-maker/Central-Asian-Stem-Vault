@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Research | Central Asian STEM Vault</title>
+
+    <script src="i18n.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #040F0E;
+            color: #C9F6FA;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 8%;
+            border-bottom: 1px solid rgba(201, 246, 250, 0.1);
+        }
+        .logo {
+            color: #C9F6FA;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a {
+            color: #C9F6FA;
+            text-decoration: none;
+            font-size: 15px;
+            opacity: 0.8;
+        }
+        .nav-links a:link, .nav-links a:visited {
+            color: #C9F6FA;
+            text-decoration: none;
+        }
+        .nav-links a:hover { opacity: 1; color: #E7BDF2; }
+
+        .lang-switch { display: flex; gap: 8px; }
+        .lang-switch button {
+            background: transparent;
+            border: 1px solid rgba(201, 246, 250, 0.25);
+            color: #C9F6FA;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .lang-switch button:hover {
+            border-color: #E7BDF2;
+            color: #E7BDF2;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 90px 8% 60px;
+        }
+        .eyebrow {
+            color: #E7BDF2;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+        .page-header h1 {
+            font-size: 52px;
+            margin: 20px 0;
+        }
+        .page-header p {
+            max-width: 700px;
+            margin: auto;
+            font-size: 18px;
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        /* Sections */
+        .section {
+            padding: 60px 8% 40px;
+            max-width: 1100px;
+            margin: auto;
+        }
+        .section h2 {
+            font-size: 34px;
+            margin-bottom: 20px;
+            color: #C9F6FA;
+        }
+        .section .lead {
+            font-size: 17px;
+            line-height: 1.7;
+            opacity: 0.8;
+            max-width: 850px;
+            margin-bottom: 35px;
+        }
+
+        /* Steps */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+        .step {
+            background: #061716;
+            border: 1px solid rgba(201, 246, 250, 0.15);
+            border-radius: 14px;
+            padding: 30px;
+        }
+        .step-number {
+            color: #E7BDF2;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+        .step h3 {
+            color: #C9F6FA;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+        .step p {
+            color: #C9F6FA;
+            opacity: 0.75;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* Resources grid */
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+        .resource-card {
+            background: rgba(201, 246, 250, 0.04);
+            border: 1px solid rgba(201, 246, 250, 0.12);
+            border-radius: 20px;
+            padding: 30px;
+            transition: 0.3s;
+        }
+        .resource-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(201, 246, 250, 0.3);
+        }
+        .resource-card .tag {
+            display: inline-block;
+            color: #E7BDF2;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        .resource-card h3 {
+            color: #C9F6FA;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        .resource-card p {
+            color: #C9F6FA;
+            opacity: 0.75;
+            line-height: 1.6;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+        .resource-card .details {
+            font-size: 14px;
+            opacity: 0.65;
+            color: #C9F6FA;
+            margin-bottom: 18px;
+            line-height: 1.7;
+        }
+        .resource-card a {
+            color: #E7BDF2;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .resource-card a:hover { color: #C9F6FA; }
+
+        /* Callout */
+        .callout {
+            max-width: 900px;
+            margin: 60px auto;
+            background: rgba(231, 189, 242, 0.08);
+            border: 1px solid rgba(231, 189, 242, 0.25);
+            border-radius: 16px;
+            padding: 35px;
+            text-align: center;
+        }
+        .callout h3 {
+            color: #E7BDF2;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+        .callout p {
+            color: #C9F6FA;
+            opacity: 0.85;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 35px;
+            border-top: 1px solid rgba(201, 246, 250, 0.1);
+            font-size: 13px;
+            opacity: 0.6;
+            margin-top: 60px;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            .nav-links { display: none; }
+            .page-header h1 { font-size: 38px; }
+            .section h2 { font-size: 28px; }
+            .steps, .resources { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">STEM Vault</a>
+                <div class="nav-links">
+            <a href="index.html" data-i18n="nav.home">Home</a>
+            <a href="opportunities.html" data-i18n="nav.opportunities">Opportunities</a>
+            <a href="scholarships.html" data-i18n="nav.scholarships">Scholarships</a>
+            <a href="research.html" data-i18n="nav.research">Research</a>
+            <a href="stem-fields.html" data-i18n="nav.fields">STEM Fields</a>
+            <a href="competitions.html" data-i18n="nav.comp">Competitions</a>
+            <a href="strategy.html" data-i18n="nav.strat">Strategy</a>
+            <a href="resources.html" data-i18n="nav.resources">Resources</a>
+            <a href="about.html" data-i18n="nav.about">About</a>
+        </div>
+        <div class="lang-switch">
+            <button onclick="setLanguage('en')">EN</button>
+            <button onclick="setLanguage('ru')">RU</button>
+            <button onclick="setLanguage('kz')">KZ</button>
+        </div>
+    </nav>
+
+
+    <header class="page-header">
+        <span class="eyebrow" data-i18n="res.eyebrow">RESEARCH</span>
+        <h1 data-i18n="res.heading">Research</h1>
+        <p data-i18n="res.subtitle">
+            Research is not only for university students or scientists in labs.
+            You can start now — even from a small town, even without expensive equipment.
+        </p>
+    </header>
+
+
+    <!-- WHAT IS RESEARCH -->
+    <section class="section">
+        <h2 data-i18n="res.what.heading">What is research, really?</h2>
+        <p class="lead" data-i18n="res.what.lead">
+            Research is a structured way of answering a question you genuinely care about.
+            It is not about memorizing facts. It is about asking "why" and "how" — and then
+            finding evidence to support your answer. Research teaches you to think independently,
+            gather reliable information, and draw conclusions from your own observations.
+        </p>
+    </section>
+
+
+    <!-- WHY DO IT -->
+    <section class="section">
+        <h2 data-i18n="res.why.heading">Why should you do research?</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3 data-i18n="res.why.step1.title">It builds real skills</h3>
+                <p data-i18n="res.why.step1.text">
+                    Research teaches you critical thinking, problem-solving, and communication
+                    skills that matter in university and any career.
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3 data-i18n="res.why.step2.title">It opens doors</h3>
+                <p data-i18n="res.why.step2.text">
+                    A research project can become a competition entry, a university application
+                    highlight, or even a published paper.
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3 data-i18n="res.why.step3.title">It solves local problems</h3>
+                <p data-i18n="res.why.step3.text">
+                    You understand your community better than anyone. Research lets you
+                    tackle real issues that matter where you live.
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-number">04</div>
+                <h3 data-i18n="res.why.step4.title">It is free to start</h3>
+                <p data-i18n="res.why.step4.text">
+                    You don't need a lab. You need curiosity, a notebook, and access to the
+                    internet or a library.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- HOW TO DO IT -->
+    <section class="section">
+        <h2 data-i18n="res.how.heading">How to do research: step by step</h2>
+        <p class="lead" data-i18n="res.how.lead">
+            Every research project follows the same basic path. Here is the process in simple steps.
+        </p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">STEP 1</div>
+                <h3 data-i18n="res.how.step1.title">Choose a topic you care about</h3>
+                <p data-i18n="res.how.step1.text">
+                    Pick something that genuinely interests you — a local environmental issue,
+                    a problem in your school, or a question from your favorite class.
+                    It should be specific enough to study.
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-number">STEP 2</div>
+                <h3 data-i18n="res.how.step2.title">Turn it into a question</h3>
+                <p data-i18n="res.how.step2.text">
+                    A good research question is clear and testable. Instead of "Is pollution bad?",
+                    try: "How does water quality differ between upstream and downstream of our village?"
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-number">STEP 3</div>
+                <h3 data-i18n="res.how.step3.title">Read what others found</h3>
+                <p data-i18n="res.how.step3.text">
+                    Before you start, look up existing research on your topic. This is called
+                    a literature review. It tells you what is already known and what gap you can fill.
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-number">STEP 4</div>
+                <h3 data-i18n="res.how.step4.title">Make a plan</h3>
+                <p data-i18n="res.how.step4.text">
+                    Write down your hypothesis (your educated guess), your method, and what you
+                    will measure. Keep it simple and realistic with the resources you have.
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-number">STEP 5</div>
+                <h3 data-i18n="res.how.step5.title">Collect your data</h3>
+                <p data-i18n="res.how.step5.text">
+                    This can be surveys, observations, experiments, or interviews.
+                    Even a notebook and a phone camera can be research tools.
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-number">STEP 6</div>
+                <h3 data-i18n="res.how.step6.title">Write it up and share</h3>
+                <p data-i18n="res.how.step6.text">
+                    A simple structure: Introduction, Methods, Results, Discussion, Conclusion.
+                    Then present your findings to your class, community, or a competition.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- HOW TO WRITE -->
+    <section class="section">
+        <h2 data-i18n="res.write.heading">How to write a research paper</h2>
+        <p class="lead" data-i18n="res.write.lead">
+            A research paper follows a standard structure. Each section has a specific job.
+        </p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">SECTION</div>
+                <h3 data-i18n="res.write.intro.title">Introduction</h3>
+                <p data-i18n="res.write.intro.text">
+                    What is your question, and why does it matter? Describe the problem
+                    and state your hypothesis.
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-number">SECTION</div>
+                <h3 data-i18n="res.write.methods.title">Methods</h3>
+                <p data-i18n="res.write.methods.text">
+                    How did you do it? Describe your procedure so clearly that someone else
+                    could repeat it exactly.
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-number">SECTION</div>
+                <h3 data-i18n="res.write.results.title">Results</h3>
+                <p data-i18n="res.write.results.text">
+                    What did you find? Present your data — numbers, tables, or graphs.
+                    Do not interpret yet. Just report.
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-number">SECTION</div>
+                <h3 data-i18n="res.write.discussion.title">Discussion</h3>
+                <p data-i18n="res.write.discussion.text">
+                    What do your results mean? Connect them to your hypothesis and to
+                    other research. Be honest about limitations.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- RESOURCES -->
+    <section class="section">
+        <h2 data-i18n="res.resources.heading">Free resources for Central Asian students</h2>
+        <p class="lead" data-i18n="res.resources.lead">
+            You do not need money or a fancy lab to start. These resources are free,
+            online, and accessible from anywhere.
+        </p>
+        <div class="resources">
+
+            <div class="resource-card">
+                <span class="tag" data-i18n="res.res1.tag">ONLINE PROGRAM</span>
+                <h3 data-i18n="res.res1.title">CARE Initiative — Nazarbayev University</h3>
+                <p data-i18n="res.res1.text">
+                    A free 4-week online program introducing high school students to AI and machine learning.
+                    You work with real research data from energy and environmental science.
+                </p>
+                <div class="details" data-i18n="res.res1.details">
+                    Location: Online via Microsoft Teams<br>
+                    Cost: Free<br>
+                    Language: English
+                </div>
+                <a href="https://nla.nu.edu.kz/page151185893.html" data-i18n="res.res1.link">Learn more →</a>
+            </div>
+
+            <div class="resource-card">
+                <span class="tag" data-i18n="res.res2.tag">SUMMER SCHOOL</span>
+                <h3 data-i18n="res.res2.title">School of Molecular and Theoretical Biology</h3>
+                <p data-i18n="res.res2.text">
+                    A free summer school at Nazarbayev University focused on hands-on biology research.
+                    Covers living expenses and materials. Travel aid available if needed.
+                </p>
+                <div class="details" data-i18n="res.res2.details">
+                    Location: Nazarbayev University, Astana<br>
+                    Cost: Free (travel aid available)<br>
+                    Language: English
+                </div>
+                <a href="https://www.snow.day/learning-opportunities/d7919bc7-e74f-4d79-b7cf-8b61d29b847c/school-of-molecular-and-theoretical-biology-smtb" data-i18n="res.res2.link">Learn more →</a>
+            </div>
+
+            <div class="resource-card">
+                <span class="tag" data-i18n="res.res3.tag">DIGITAL LIBRARY</span>
+                <h3 data-i18n="res.res3.title">National Library of Kazakhstan</h3>
+                <p data-i18n="res.res3.text">
+                    Access scientific publications, archives, and rare editions. Registration is free.
+                    You can request scans directly from the Almaty library.
+                </p>
+                <div class="details" data-i18n="res.res3.details">
+                    Location: Online<br>
+                    Cost: Free
+                </div>
+                <a href="#" data-i18n="res.res3.link">Visit library →</a>
+            </div>
+
+            <div class="resource-card">
+                <span class="tag" data-i18n="res.res4.tag">DIGITAL LIBRARY</span>
+                <h3 data-i18n="res.res4.title">CyberLeninka</h3>
+                <p data-i18n="res.res4.text">
+                    One of the largest open-access libraries for scientific articles in Russian.
+                    Free to read and download. Great for finding sources in your language.
+                </p>
+                <div class="details" data-i18n="res.res4.details">
+                    Location: Online<br>
+                    Language: Russian<br>
+                    Cost: Free
+                </div>
+                <a href="https://cyberleninka.ru" data-i18n="res.res4.link">Visit CyberLeninka →</a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CALLOUT -->
+    <div class="callout">
+        <h3 data-i18n="res.callout.title">You don't need a lab to do research.</h3>
+        <p data-i18n="res.callout.text">
+            Some of the best research starts with a simple question about your own community.
+            Your local knowledge is a real advantage. Start small, stay curious, and ask for help
+            when you need it — teachers, mentors, and online communities are there for you.
+        </p>
+    </div>
+
+
+    <footer>
+        <span data-i18n="footer.copy">© 2026 Central Asian STEM Vault</span>
+    </footer>
+
+</body>
+</html>
