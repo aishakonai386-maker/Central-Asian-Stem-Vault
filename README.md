@@ -11,7 +11,7 @@ Central Asian STEM Vault is a trilingual online platform that provides free STEM
 
 ## My Role
 
-- Developing and continuously upgrading based on users' needs. Trying to make long-lasting changes in education making it more accessible and easy to understand for confused students while creating equity.
+- Developing and continuously upgrading based on users' needs. I'm aiming to make long-lasting changes in education making it more accessible and easy to understand for confused students while creating equity.
 
 ## Features
 
