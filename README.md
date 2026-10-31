@@ -25,7 +25,7 @@ Central Asian STEM Vault is a trilingual online platform that provides free STEM
 
 ## Tech Stack
 
-- JAVA
+- JAVAScript
 - HTML
 
 ## Live Website
