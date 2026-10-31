@@ -7,7 +7,7 @@ Central Asian STEM Vault is a trilingual online platform that provides free STEM
 - Available in English, Russian, and Kazakh
 - Designed to improve access to STEM learning and scholarship opportunities for students in rural Central Asia
 - Provides free study guides, research tools, and scholarship resources
-- Reached 2,000+ users/visits
+
 
 ## My Role
 
